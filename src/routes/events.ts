@@ -1,8 +1,7 @@
-// /routes/events.ts
 import { Router } from 'express';
 import { body, validationResult } from 'express-validator';
-import verifyToken from '../middleware/auth'; // your existing JWT middleware
-import { processEvent } from '../services/pointsEngine';
+import verifyToken from '../middleware/auth';
+import { processEvent } from '../rules/points-engine';
 
 const router = Router();
 

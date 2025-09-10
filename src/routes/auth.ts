@@ -1,30 +1,32 @@
-const router = require('express').Router();
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
-const PartnerOrg = require('../models/PartnerOrg');
+import { Router, Request, Response } from 'express';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import User from '../models/User';
+import PartnerOrg from '../models/PartnerOrg';
+
+const router = Router();
 
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecret';
 const SALT_ROUNDS = Number(process.env.BCRYPT_ROUNDS || 10);
 const ADMIN_INVITE_CODE = process.env.ADMIN_INVITE_CODE;
 const PM_INVITE_CODE = process.env.PM_INVITE_CODE;
 
-function issueToken(user) {
+function issueToken(user: any) {
   return jwt.sign({ sub: user._id.toString(), role: user.role }, JWT_SECRET, { expiresIn: '7d' });
 }
 
-function safeUser(u) {
+function safeUser(u: any) {
   return {
     id: u._id,
     email: u.email,
     name: u.name,
-    role: u.role,                // 'Admin' | 'PartnerManager' | 'PartnerUser'
+    role: u.role,
     partnerOrg: u.partnerOrg || null,
   };
 }
 
 // SIGNUP
-router.post('/signup', async (req, res) => {
+router.post('/signup', async (req: Request, res: Response) => {
   try {
     let { email, password, name, partnerOrgName, partnerType, role } = req.body || {};
     if (!email || !password) return res.status(400).json({ message: 'email & password required' });
@@ -45,7 +47,7 @@ router.post('/signup', async (req, res) => {
     const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
 
     // Optional partner org
-    let org = null;
+    let org: any = null;
     if (partnerOrgName) {
       org = await PartnerOrg.findOne({ name: partnerOrgName.trim() });
       if (!org) org = await PartnerOrg.create({ name: partnerOrgName.trim(), type: partnerType || 'Reseller' });
@@ -55,7 +57,7 @@ router.post('/signup', async (req, res) => {
       email,
       passwordHash,
       name: name || email.split('@')[0],
-      role: resolvedRole,         // keep your enum
+      role: resolvedRole,
       partnerOrg: org?._id || null,
     });
 
@@ -69,7 +71,7 @@ router.post('/signup', async (req, res) => {
 });
 
 // LOGIN
-router.post('/login', async (req, res) => {
+router.post('/login', async (req: Request, res: Response) => {
   try {
     let { email, password } = req.body || {};
     if (!email || !password) return res.status(400).json({ message: 'email & password required' });
@@ -78,7 +80,7 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({ email }).select('+passwordHash').populate('partnerOrg');
     if (!user) return res.status(401).json({ message: 'invalid credentials' });
 
-    const ok = await bcrypt.compare(password, user.passwordHash);
+    const ok = await bcrypt.compare(password, (user as any).passwordHash);
     if (!ok) return res.status(401).json({ message: 'invalid credentials' });
 
     const token = issueToken(user);
@@ -89,4 +91,4 @@ router.post('/login', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

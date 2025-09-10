@@ -1,13 +1,12 @@
+import PointLedger from '../../models/PointLedger';
+import User from '../../models/User';
+import rules from './rules';
 
-const PointLedger = require('../../models/PointLedger');
-const User = require('../../models/User');
-const rules = require('./rules');
-
-function tpl(str, payload) {
+function tpl(str: string, payload: Record<string, any>) {
   return str.replace(/\{\{(\w+)\}\}/g, (_, k) => (payload?.[k] ?? ''));
 }
 
-async function awardForEvent(eventDoc) {
+export async function awardForEvent(eventDoc: any) {
   const rule = rules.find(r => r.eventType === eventDoc.type);
   if (!rule) return;
   if (rule.condition && !rule.condition(eventDoc.payload)) return;
@@ -16,4 +15,3 @@ async function awardForEvent(eventDoc) {
   await PointLedger.create({ user: eventDoc.user, delta, reason, event: eventDoc._id });
   await User.updateOne({ _id: eventDoc.user }, { $inc: { points: delta } });
 }
-module.exports = { awardForEvent };
