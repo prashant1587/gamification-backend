@@ -1,11 +1,10 @@
-
-require('dotenv').config();
-const connect = require('../src/config/db');
-const bcrypt = require('bcrypt');
-const User = require('../src/models/User');
-const PartnerOrg = require('../src/models/PartnerOrg');
-const RewardCatalog = require('../src/models/RewardCatalog');
-const Challenge = require('../src/models/Challenge');
+import 'dotenv/config';
+import connect from '../src/config/db';
+import bcrypt from 'bcrypt';
+import User from '../src/models/User';
+import PartnerOrg from '../src/models/PartnerOrg';
+import RewardCatalog from '../src/models/RewardCatalog';
+import Challenge from '../src/models/Challenge';
 
 (async () => {
   await connect();
@@ -23,4 +22,4 @@ const Challenge = require('../src/models/Challenge');
   await Challenge.create({ name: 'Deal Reg Sprint', description: 'Register 3 deals in two weeks', metric: 'DEALS_REGISTERED', goal: 3, startAt: now, endAt: end, audience: 'All', rewardPoints: 50 });
   console.log('Seeded. Login: demo@partner.com / demo123');
   process.exit(0);
-})().catch(e=>{ console.error(e); process.exit(1); });
+})().catch(e => { console.error(e); process.exit(1); });

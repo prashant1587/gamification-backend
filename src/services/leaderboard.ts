@@ -1,5 +1,6 @@
 // /services/leaderboard.ts
 import Activity from '../models/ActivityEvent';
+import mongoose from 'mongoose';
 
 export async function topNByQuarter(n = 10, date = new Date()) {
   const q = Math.floor(date.getUTCMonth()/3); // 0..3
@@ -24,16 +25,15 @@ export async function topNByOrg(orgId: string, n = 10, since?: Date, until?: Dat
     if (since || until) match.occurredAt = {};
     if (since) match.occurredAt.$gte = since;
     if (until) match.occurredAt.$lt = until;
-  
+
     const agg = await Activity.aggregate([
       { $match: match },
       { $lookup: { from: 'users', localField: 'user', foreignField: '_id', as: 'u' } },
       { $unwind: '$u' },
-      { $match: { 'u.org': new (require('mongoose').Types.ObjectId)(orgId) } },
+      { $match: { 'u.org': new mongoose.Types.ObjectId(orgId) } },
       { $group: { _id: '$user', points: { $sum: '$finalPoints' }, name: { $first: '$u.name' } } },
       { $sort: { points: -1 } },
       { $limit: n }
     ]);
     return agg;
   }
-  
