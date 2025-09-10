@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import User from '../models/User';
-import PartnerOrg from '../models/PartnerOrg';
+import User from '../models/user';
+import PartnerOrg from '../models/partner-org';
 
 const router = Router();
 

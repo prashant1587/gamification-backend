@@ -1,10 +1,10 @@
 import 'dotenv/config';
 import connect from '../src/config/db';
 import bcrypt from 'bcrypt';
-import User from '../src/models/User';
-import PartnerOrg from '../src/models/PartnerOrg';
-import RewardCatalog from '../src/models/RewardCatalog';
-import Challenge from '../src/models/Challenge';
+import User from '../src/models/user';
+import PartnerOrg from '../src/models/partner-org';
+import RewardCatalog from '../src/models/reward-catalog';
+import Challenge from '../src/models/challenge';
 
 (async () => {
   await connect();

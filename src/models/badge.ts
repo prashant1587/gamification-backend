@@ -1,4 +1,4 @@
-// /models/Badge.ts
+// /models/badge.ts
 import mongoose, { Schema, Types } from 'mongoose';
 
 export interface IBadge extends mongoose.Document {

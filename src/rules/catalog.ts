@@ -1,5 +1,5 @@
 // /rules/catalog.ts
-import { ActivityType } from '../models/Activity';
+import { ActivityType } from '../models/activity-event';
 
 export const BASE_POINTS: Record<ActivityType, number> = {
   content_view: 2,

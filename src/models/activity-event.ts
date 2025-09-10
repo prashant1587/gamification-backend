@@ -1,4 +1,4 @@
-// /models/Activity.ts
+// /models/activity-event.ts
 import mongoose, { Schema, Types } from 'mongoose';
 
 export type ActivityType =

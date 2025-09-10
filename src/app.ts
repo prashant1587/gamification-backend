@@ -4,17 +4,17 @@ import cors from 'cors';
 import connect from './config/db';
 
 // ✅ Ensure models are registered before any populate() calls
-import './models/Badge';
-import './models/User';
-import './models/PartnerOrg';
-import './models/PointLedger';
-import './models/RewardCatalog';
-import './models/Redemption';
-import './models/Challenge';
-import './models/Deal';
-import './models/Training';
-import './models/TierStatus';
-import './models/LeaderboardSnapshot';
+import './models/badge';
+import './models/user';
+import './models/partner-org';
+import './models/point-ledger';
+import './models/reward-catalog';
+import './models/redemption';
+import './models/challenge';
+import './models/deal';
+import './models/training';
+import './models/tier-status';
+import './models/leaderboard-snapshot';
 
 import authRoutes from './routes/auth';
 import meRoutes from './routes/me';

@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
 import auth from '../middleware/auth';
-import Training from '../models/Training';
-import ActivityEvent from '../models/ActivityEvent';
-import { awardForEvent } from '../services/pointsEngine/engine';
+import Training from '../models/training';
+import ActivityEvent from '../models/activity-event';
+import { awardForEvent } from '../services/points-engine/engine';
 
 const router = Router();
 
