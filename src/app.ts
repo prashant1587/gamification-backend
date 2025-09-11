@@ -25,10 +25,14 @@ import challengesRoutes from './routes/challenges';
 import rewardsRoutes from './routes/rewards';
 import leaderboardsRoutes from './routes/leaderboards';
 import tiersRoutes from './routes/tiers';
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/me', meRoutes);
