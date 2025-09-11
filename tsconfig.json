@@ -2,11 +2,12 @@
   "compilerOptions": {
     "target": "es2019",
     "module": "commonjs",
-    "rootDir": ".",
+    "rootDir": "src",
     "outDir": "dist",
     "esModuleInterop": true,
     "strict": false,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["node"]
   },
-  "include": ["src/**/*", "scripts/**/*"]
+  "include": ["src/**/*"]
 }
