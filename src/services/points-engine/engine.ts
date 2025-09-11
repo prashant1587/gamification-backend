@@ -1,5 +1,5 @@
-import PointLedger from '../../models/PointLedger';
-import User from '../../models/User';
+import PointLedger from '../../models/point-ledger';
+import User from '../../models/user';
 import rules from './rules';
 
 function tpl(str: string, payload: Record<string, any>) {

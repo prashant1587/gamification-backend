@@ -1,4 +1,4 @@
-// /models/User.ts
+// /models/user.ts
 import mongoose, { Schema, Types } from 'mongoose';
 
 export type PartnerTier = 'Bronze'|'Silver'|'Gold'|'Platinum';

@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
 import auth from '../middleware/auth';
-import Challenge from '../models/Challenge';
-import ActivityEvent from '../models/ActivityEvent';
-import User from '../models/User';
-import PointLedger from '../models/PointLedger';
+import Challenge from '../models/challenge';
+import ActivityEvent from '../models/activity-event';
+import User from '../models/user';
+import PointLedger from '../models/point-ledger';
 
 const router = Router();
 

@@ -1,8 +1,8 @@
-// /services/pointsEngine.ts
+// /services/points-engine.ts
 import mongoose from 'mongoose';
-import Activity, { ActivityType } from '../models/ActivityEvent';
-import { Badge, BadgeAward } from '../models/Badge';
-import User from '../models/User';
+import Activity, { ActivityType } from '../models/activity-event';
+import { Badge, BadgeAward } from '../models/badge';
+import User from '../models/user';
 import { BASE_POINTS, dealValueBonus } from '../rules/catalog';
 import { clampByDailyCap, tierMultiplier, trainingStreakBonus } from '../rules/modifier';
 
@@ -131,7 +131,7 @@ async function evaluateAndAwardBadges(userId: any, { session }: { session: any }
     if (b.rule?.type === 'threshold') {
       // e.g., { activity: 'deal_closed', count: 5 }
       const { activity, count } = b.rule.config || {};
-      const agg = await (await import('../models/ActivityEvent')).default.aggregate([
+      const agg = await (await import('../models/activity-event')).default.aggregate([
         { $match: { user: userId, type: activity } },
         { $count: 'n' },
       ]).session(session);
@@ -145,7 +145,7 @@ async function evaluateAndAwardBadges(userId: any, { session }: { session: any }
       if (Array.isArray(allOf)) {
         let ok = true;
         for (const c of allOf) {
-          const agg = await (await import('../models/ActivityEvent')).default.aggregate([
+          const agg = await (await import('../models/activity-event')).default.aggregate([
             { $match: { user: userId, type: c.type } },
             { $count: 'n' },
           ]).session(session);

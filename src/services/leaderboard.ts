@@ -1,5 +1,5 @@
 // /services/leaderboard.ts
-import Activity from '../models/ActivityEvent';
+import Activity from '../models/activity-event';
 import mongoose from 'mongoose';
 
 export async function topNByQuarter(n = 10, date = new Date()) {

@@ -1,6 +1,6 @@
 // /rules/modifiers.ts
-import { ActivityType } from '../models/Activity';
-import { IUser } from '../models/User';
+import { ActivityType } from '../models/activity-event';
+import { IUser } from '../models/user';
 
 export function tierMultiplier(user: IUser): { factor: number; label: string } {
   switch (user.tier) {

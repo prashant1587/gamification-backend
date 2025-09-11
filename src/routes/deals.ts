@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
 import auth from '../middleware/auth';
-import Deal from '../models/Deal';
-import ActivityEvent from '../models/ActivityEvent';
-import { awardForEvent } from '../services/pointsEngine/engine';
+import Deal from '../models/deal';
+import ActivityEvent from '../models/activity-event';
+import { awardForEvent } from '../services/points-engine/engine';
 
 const router = Router();
 

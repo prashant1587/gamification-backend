@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
 import auth from '../middleware/auth';
-import RewardCatalog from '../models/RewardCatalog';
-import Redemption from '../models/Redemption';
-import User from '../models/User';
-import PointLedger from '../models/PointLedger';
+import RewardCatalog from '../models/reward-catalog';
+import Redemption from '../models/redemption';
+import User from '../models/user';
+import PointLedger from '../models/point-ledger';
 
 const router = Router();
 

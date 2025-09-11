@@ -1,5 +1,5 @@
 // /seeds/badges.seed.ts
-import { Badge } from '../models/Badge';
+import { Badge } from '../models/badge';
 
 export async function seedBadges() {
   await Badge.updateOne(

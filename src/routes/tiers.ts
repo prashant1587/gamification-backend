@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import auth from '../middleware/auth';
-import TierStatus from '../models/TierStatus';
-import User from '../models/User';
+import TierStatus from '../models/tier-status';
+import User from '../models/user';
 
 const router = Router();
 

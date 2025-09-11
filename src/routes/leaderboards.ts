@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
 import auth from '../middleware/auth';
-import LeaderboardSnapshot from '../models/LeaderboardSnapshot';
+import LeaderboardSnapshot from '../models/leaderboard-snapshot';
 
 const router = Router();
 
